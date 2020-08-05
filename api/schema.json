@@ -78,12 +78,24 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           "name": {
             "type": "string"
           },
-          "tag": {
+          "commonName": {
+            "type": "string"
+          },
+          "potency": {
+            "type": "string"
+          },
+          "form": {
+            "type": "string"
+          },
+          "activeSubstance": {
+            "type": "string"
+          },
+          "atc": {
             "type": "string"
           }
         }
@@ -95,7 +107,29 @@
           "procedureType",
           "licenceNumber",
           "licenceExpirationDate"
-        ]
+        ],
+        "properties": {
+          "entityInCharge": {
+            "type": "string"
+          },
+          "procedureType": {
+            "type": "string",
+            "enum": [
+              "NAR",
+              "DCP",
+              "CEN",
+              "IR",
+              "MRP"
+            ]
+          },
+          "licenceNumber": {
+            "type": "string"
+          },
+          "licenceExpirationDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
       },
       "Packaging": {
         "type": "object",
@@ -103,7 +137,8 @@
           "ean",
           "size",
           "unit",
-          "accessability"
+          "accessabilityCategory",
+          "deleted"
         ],
         "properties": {
           "id": {
