@@ -72,8 +72,7 @@
           "commonName",
           "potency",
           "form",
-          "activeSubstance",
-          "atc"
+          "activeSubstance"
         ],
         "properties": {
           "id": {
@@ -104,9 +103,7 @@
         "type": "object",
         "required": [
           "entityInCharge",
-          "procedureType",
-          "licenceNumber",
-          "licenceExpirationDate"
+          "procedureType"
         ],
         "properties": {
           "entityInCharge": {
