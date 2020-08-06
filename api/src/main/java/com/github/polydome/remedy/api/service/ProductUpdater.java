@@ -19,8 +19,9 @@ public class ProductUpdater {
 
     @Scheduled(cron = "${productDataSource.cron}", zone = "${productDataSource.zone}")
     public void updateProducts() {
-        productDataSource.packagings().subscribe(packagingRepository::save);
-        productDataSource.products().subscribe(productRepository::save);
-        productDataSource.update();
+        productDataSource.fetchProducts(
+                productRepository::save,
+                packagingRepository::save
+        );
     }
 }
