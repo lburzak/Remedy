@@ -1,4 +1,4 @@
-package com.github.polydome.remedy;
+package com.github.polydome.remedy.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

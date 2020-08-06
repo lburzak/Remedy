@@ -1,4 +1,4 @@
-package com.github.polydome.remedy.app.config;
+package com.github.polydome.remedy.app;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.github.polydome.remedy.repository")
-@ComponentScan("com.github.polydome.remedy.repository")
-public class Config extends AbstractMongoClientConfiguration {
+@EnableMongoRepositories(basePackages = "com.github.polydome.remedy.api.repository")
+@ComponentScan("com.github.polydome.remedy.api.repository")
+public class AppConfig extends AbstractMongoClientConfiguration {
     @Override
     protected String getDatabaseName() {
         return "remedy";
@@ -19,6 +19,6 @@ public class Config extends AbstractMongoClientConfiguration {
 
     @Override
     protected Collection<String> getMappingBasePackages() {
-        return Collections.singleton("com.github.polydome.remedy.repository");
+        return Collections.singleton("com.github.polydome.remedy.api.repository");
     }
 }

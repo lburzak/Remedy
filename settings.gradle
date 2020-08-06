@@ -1,4 +1,13 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version springBootVersion
+        id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    }
+}
+
 rootProject.name = 'Remedy'
 include 'api'
+include 'app'
 include 'csioz'
+
 

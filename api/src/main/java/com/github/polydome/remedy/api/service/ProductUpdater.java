@@ -1,7 +1,7 @@
-package com.github.polydome.remedy.service;
+package com.github.polydome.remedy.api.service;
 
-import com.github.polydome.remedy.repository.PackagingRepository;
-import com.github.polydome.remedy.repository.ProductRepository;
+import com.github.polydome.remedy.api.repository.PackagingRepository;
+import com.github.polydome.remedy.api.repository.ProductRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

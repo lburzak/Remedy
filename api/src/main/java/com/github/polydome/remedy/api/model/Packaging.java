@@ -1,4 +1,4 @@
-package com.github.polydome.remedy.model;
+package com.github.polydome.remedy.api.model;
 
 import lombok.Data;
 

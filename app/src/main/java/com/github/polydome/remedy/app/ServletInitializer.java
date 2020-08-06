@@ -1,4 +1,4 @@
-package com.github.polydome.remedy;
+package com.github.polydome.remedy.app;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

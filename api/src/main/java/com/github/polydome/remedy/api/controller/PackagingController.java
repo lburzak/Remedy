@@ -1,7 +1,7 @@
-package com.github.polydome.remedy.controller;
+package com.github.polydome.remedy.api.controller;
 
-import com.github.polydome.remedy.model.Packaging;
-import com.github.polydome.remedy.repository.PackagingRepository;
+import com.github.polydome.remedy.api.model.Packaging;
+import com.github.polydome.remedy.api.repository.PackagingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
