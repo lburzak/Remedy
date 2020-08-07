@@ -21,15 +21,16 @@ import java.util.Collections;
 @ComponentScan(basePackages = {"com.github.polydome.remedy.api", "com.github.polydome.remedy.csioz"})
 @EnableScheduling
 public class RemedyApplication extends AbstractMongoClientConfiguration {
-
-    @Override
-    protected String getDatabaseName() {
-        return "remedy";
-    }
+    private @Value("${db.name}") String dbName;
 
     @Override
     protected Collection<String> getMappingBasePackages() {
         return Collections.singleton("com.github.polydome.remedy.api.repository");
+    }
+
+    @Override
+    protected String getDatabaseName() {
+        return dbName;
     }
 
     @Bean
