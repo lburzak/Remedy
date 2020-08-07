@@ -1,8 +1,10 @@
 package com.github.polydome.remedy.app;
 
+import com.github.polydome.remedy.api.service.ProductUpdater;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
@@ -10,6 +12,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.inject.Named;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -36,7 +39,11 @@ public class RemedyApplication extends AbstractMongoClientConfiguration {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(RemedyApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(RemedyApplication.class, args);
+        if (Arrays.asList(args).contains("--updateProducts")) {
+            ProductUpdater productUpdater = context.getBean(ProductUpdater.class);
+            productUpdater.updateProducts();
+        }
     }
 
 }
