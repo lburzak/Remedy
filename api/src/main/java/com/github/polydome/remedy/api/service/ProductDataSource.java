@@ -6,5 +6,5 @@ import com.github.polydome.remedy.api.model.Product;
 import java.util.function.Consumer;
 
 public interface ProductDataSource {
-    void fetchProducts(Consumer<Product> onProduct, Consumer<Packaging> onPackaging);
+    void fetchProducts(Consumer<Product> onProduct, Consumer<Packaging> onPackaging) throws DataSourceNotAvailableException;
 }
