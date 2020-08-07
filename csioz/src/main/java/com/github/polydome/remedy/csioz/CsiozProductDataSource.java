@@ -122,9 +122,17 @@ public class CsiozProductDataSource implements ProductDataSource {
     }
 
     private Packaging createPackaging(int productId, Attributes attributes) {
+        String sourceSize = attributes.getValue(ATTR_PACKAGING_SIZE);
+        int convertedSize;
+        if (sourceSize == null) {
+            convertedSize = 1;
+        } else {
+            convertedSize = Integer.parseInt(sourceSize.trim());
+        }
+
         return Packaging.builder()
                 .productId(productId)
-                .size(Integer.parseInt(attributes.getValue(ATTR_PACKAGING_SIZE)))
+                .size(convertedSize)
                 .unit(attributes.getValue(ATTR_PACKAGING_UNIT))
                 .ean(attributes.getValue(ATTR_PACKAGING_EAN))
                 .id(Long.parseLong(attributes.getValue(ATTR_PACKAGING_ID)))
