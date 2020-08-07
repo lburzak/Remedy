@@ -13,8 +13,7 @@ dependencies {
     implementation project(':api')
     implementation group: 'io.projectreactor', name: 'reactor-core', version: '3.3.8.RELEASE'
     implementation 'com.squareup.okhttp:okhttp:2.7.5'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0-M1'
-    testImplementation 'org.junit.platform:junit-platform-commons:1.7.0-M1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0-M1'
 }
 
 test {
