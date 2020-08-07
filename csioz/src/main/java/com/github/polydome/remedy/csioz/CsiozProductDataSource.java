@@ -4,6 +4,9 @@ import com.github.polydome.remedy.api.model.Packaging;
 import com.github.polydome.remedy.api.model.Product;
 import com.github.polydome.remedy.api.service.DataSourceNotAvailableException;
 import com.github.polydome.remedy.api.service.ProductDataSource;
+import com.github.polydome.remedy.csioz.endpoint.ProductRegistryEndpoint;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
 
+@Service
 public class CsiozProductDataSource implements ProductDataSource {
     private final ProductRegistryEndpoint productRegistryEndpoint;
     private final SAXParser saxParser;
@@ -31,6 +35,7 @@ public class CsiozProductDataSource implements ProductDataSource {
     private final String ATTR_PACKAGING_EAN = "kodEAN";
     private final String ATTR_PACKAGING_ID = "id";
 
+    @Autowired
     public CsiozProductDataSource(ProductRegistryEndpoint productRegistryEndpoint, SAXParser saxParser) {
         this.productRegistryEndpoint = productRegistryEndpoint;
         this.saxParser = saxParser;
@@ -53,7 +58,7 @@ public class CsiozProductDataSource implements ProductDataSource {
                 int productId;
 
                 @Override
-                public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+                public void startElement(String uri, String localName, String qName, Attributes attributes) {
                     switch (qName) {
                         case TAG_PRODUCT:
                             productId = Integer.parseInt(attributes.getValue(ATTR_PRODUCT_ID));
@@ -63,7 +68,16 @@ public class CsiozProductDataSource implements ProductDataSource {
                             insideActiveSubstanceTag = true;
                             break;
                         case TAG_PACKAGING:
-                            onPackaging.accept(createPackaging(productId, attributes));
+                            try {
+                                onPackaging.accept(createPackaging(productId, attributes));
+                            } catch (IllegalArgumentException e) {
+                                System.out.printf("Malformed package: size=%s, unit=%s, ean=%s, id=%s%n",
+                                    attributes.getValue(ATTR_PACKAGING_SIZE),
+                                    attributes.getValue(ATTR_PACKAGING_UNIT),
+                                    attributes.getValue(ATTR_PACKAGING_EAN),
+                                    Long.parseLong(attributes.getValue(ATTR_PACKAGING_ID))
+                                );
+                            }
                             break;
                     }
                 }

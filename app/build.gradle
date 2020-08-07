@@ -21,9 +21,12 @@ repositories {
 
 dependencies {
     implementation project(':api')
+    implementation project(':csioz')
     implementation "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
+    implementation 'javax.inject:javax.inject:1'
 }
 
 test {

@@ -2,6 +2,7 @@ package com.github.polydome.remedy.csioz;
 
 import com.github.polydome.remedy.api.model.Packaging;
 import com.github.polydome.remedy.api.model.Product;
+import com.github.polydome.remedy.csioz.endpoint.ProductRegistryEndpoint;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
