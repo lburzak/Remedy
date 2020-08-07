@@ -58,7 +58,7 @@ class CsiozProductDataSourceTest {
     final Packaging packaging3 = Packaging.builder()
             .size(1)
             .unit("tuba 30 g")
-            .ean("05909991023683")
+            .ean("05909991023690")
             .id(6)
             .productId(product2.getId())
             .build();

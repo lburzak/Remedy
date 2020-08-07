@@ -17,7 +17,7 @@ public class CsiozProductDataSource implements ProductDataSource {
     private final ProductRegistryEndpoint productRegistryEndpoint;
     private final SAXParser saxParser;
 
-    private final String TAG_PRODUCT = "productLeczniczy";
+    private final String TAG_PRODUCT = "produktLeczniczy";
     private final String TAG_ACTIVE_SUBSTANCE = "substancjaCzynna";
     private final String TAG_PACKAGING = "opakowanie";
     private final String ATTR_PRODUCT_NAME = "nazwaProduktu";
@@ -113,7 +113,7 @@ public class CsiozProductDataSource implements ProductDataSource {
                 .size(Integer.parseInt(attributes.getValue(ATTR_PACKAGING_SIZE)))
                 .unit(attributes.getValue(ATTR_PACKAGING_UNIT))
                 .ean(attributes.getValue(ATTR_PACKAGING_EAN))
-                .id(Long.parseLong(ATTR_PACKAGING_ID))
+                .id(Long.parseLong(attributes.getValue(ATTR_PACKAGING_ID)))
                 .build();
     }
 }
