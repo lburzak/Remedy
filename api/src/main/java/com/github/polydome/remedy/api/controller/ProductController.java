@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -18,6 +20,11 @@ public class ProductController {
 
     @GetMapping("{id}")
     public Product getProduct(@PathVariable int id) {
-        return productRepository.findById(id);
+        Product product = productRepository.findById(id);
+
+        if (product == null)
+            throw new EntityNotFoundException(String.format("Product identified by [id=%d] not found", id));
+
+        return product;
     }
 }
