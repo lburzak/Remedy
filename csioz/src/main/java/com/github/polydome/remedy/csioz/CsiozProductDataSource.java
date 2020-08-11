@@ -130,11 +130,16 @@ public class CsiozProductDataSource implements ProductDataSource {
             convertedSize = Integer.parseInt(sourceSize.trim());
         }
 
+        String ean = attributes.getValue(ATTR_PACKAGING_EAN);
+        if (ean != null && ean.length() == 14) {
+            ean = ean.substring(1);
+        }
+
         return Packaging.builder()
                 .productId(productId)
                 .size(convertedSize)
                 .unit(attributes.getValue(ATTR_PACKAGING_UNIT))
-                .ean(attributes.getValue(ATTR_PACKAGING_EAN))
+                .ean(ean)
                 .id(Long.parseLong(attributes.getValue(ATTR_PACKAGING_ID)))
                 .build();
     }
