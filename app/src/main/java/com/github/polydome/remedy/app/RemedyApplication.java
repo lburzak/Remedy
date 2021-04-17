@@ -1,6 +1,8 @@
 package com.github.polydome.remedy.app;
 
 import com.github.polydome.remedy.api.service.ProductUpdater;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +23,18 @@ import java.util.Collections;
 @ComponentScan(basePackages = {"com.github.polydome.remedy.api", "com.github.polydome.remedy.csioz"})
 @EnableScheduling
 public class RemedyApplication extends AbstractMongoClientConfiguration {
-    private @Value("${db.name}") String dbName;
+    private @Value("${db.name}")
+    String dbName;
+    private @Value("${spring.data.mongodb.uri}")
+    String mongoUri;
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(RemedyApplication.class, args);
+        if (Arrays.asList(args).contains("--updateProducts")) {
+            ProductUpdater productUpdater = context.getBean(ProductUpdater.class);
+            productUpdater.updateProducts();
+        }
+    }
 
     @Override
     protected Collection<String> getMappingBasePackages() {
@@ -33,18 +46,15 @@ public class RemedyApplication extends AbstractMongoClientConfiguration {
         return dbName;
     }
 
+    @Override
+    protected void configureClientSettings(MongoClientSettings.Builder builder) {
+        builder.applyConnectionString(new ConnectionString(mongoUri));
+    }
+
     @Bean
     @Named("registryUrl")
     public String registryUrl(@Value("${productDataSource.registryUrl}") String registryUrl) {
         return registryUrl;
-    }
-
-    public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(RemedyApplication.class, args);
-        if (Arrays.asList(args).contains("--updateProducts")) {
-            ProductUpdater productUpdater = context.getBean(ProductUpdater.class);
-            productUpdater.updateProducts();
-        }
     }
 
 }
