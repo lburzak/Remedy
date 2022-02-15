@@ -12,3 +12,4 @@ gradlew.bat
 
 # IDE
 .idea
+/local.properties
